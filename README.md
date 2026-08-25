@@ -4,7 +4,7 @@ Projeto desenvolvido como atividade da **IBAC** utilizando **Next.js (App Router
 
 ## Tecnologias
 
-* Next.js
+* Next.js 15 (App Router)
 * React
 * TypeScript
 * Jest
@@ -28,14 +28,16 @@ Acesse: `http://localhost:3000`
 
 ## Como executar os testes
 
+## Testes executados
+
 ```bash
 npm test
 ```
 
-Resultado esperado:
+Resultado atual:
 
-* 3 suítes de testes aprovadas.
-* 6 testes executados com sucesso.
+- ✅ 4 suítes de testes aprovadas.
+- ✅ 7 testes executados com sucesso.
 
 ## Autor
 
