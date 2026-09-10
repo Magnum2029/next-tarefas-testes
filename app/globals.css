@@ -1,26 +1,255 @@
-@import "tailwindcss";
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  font-family: Arial, Helvetica, sans-serif;
+  color: #e5e7eb;
+  background: #0f172a;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, #1e293b 0%, #0f172a 45%, #020617 100%);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.container {
+  width: min(100% - 32px, 720px);
+  margin: 0 auto;
+  padding: 70px 0;
+}
+
+.container > h1 {
+  margin-bottom: 10px;
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: #f8fafc;
+}
+
+.container > p {
+  margin-bottom: 32px;
+  color: #94a3b8;
+  font-size: 1rem;
+}
+
+.container > div {
+  display: flex;
+  gap: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  background: rgba(30, 41, 59, 0.75);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+}
+
+input {
+  flex: 1;
+  min-width: 0;
+  padding: 14px 16px;
+  border: 1px solid #475569;
+  border-radius: 10px;
+  outline: none;
+  color: #f8fafc;
+  background: #0f172a;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input::placeholder {
+  color: #64748b;
+}
+
+input:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+}
+
+button {
+  padding: 14px 22px;
+  border: 0;
+  border-radius: 10px;
+  color: #082f49;
+  background: #38bdf8;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+button:hover {
+  background: #7dd3fc;
+  transform: translateY(-1px);
+}
+
+h3 {
+  margin: 28px 0 14px;
+  color: #cbd5e1;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+ul {
+  display: grid;
+  gap: 12px;
+  list-style: none;
+}
+
+li {
+  padding: 18px 20px;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  color: #e2e8f0;
+  background: rgba(30, 41, 59, 0.7);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+li:hover {
+  border-color: #475569;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 560px) {
+  .container {
+    padding: 40px 0;
+  }
+
+  .container > div {
+    flex-direction: column;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+
+.tarefa-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.tarefa-conteudo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.tarefa-conteudo input[type="checkbox"] {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  accent-color: #38bdf8;
+  cursor: pointer;
+}
+
+.tarefa-concluida {
+  color: #64748b;
+  text-decoration: line-through;
+}
+
+.botao-excluir {
+  padding: 9px 14px;
+  color: #fecaca;
+  background: rgba(127, 29, 29, 0.45);
+}
+
+.botao-excluir:hover {
+  color: #ffffff;
+  background: #b91c1c;
+}
+
+@media (max-width: 560px) {
+  .tarefa-item {
+    align-items: flex-start;
+  }
+
+  .botao-excluir {
+    width: auto;
+  }
+}
+
+.filtros {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filtros button {
+  padding: 10px 16px;
+  color: #cbd5e1;
+  background: #1e293b;
+  border: 1px solid #334155;
+}
+
+.filtros button:hover {
+  color: #ffffff;
+  background: #334155;
+}
+
+.filtros .filtro-ativo {
+  color: #082f49;
+  background: #38bdf8;
+  border-color: #38bdf8;
+}
+
+.lista-vazia {
+  margin-top: 20px;
+  padding: 20px;
+  text-align: center;
+  color: #64748b;
+  border: 1px dashed #334155;
+  border-radius: 12px;
+}
+
+@media (max-width: 560px) {
+  .filtros {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .filtros button {
+    width: 100%;
+  }
+}
+
+.resumo-tarefas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 28px 0 20px;
+}
+
+.resumo-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  background: rgba(30, 41, 59, 0.7);
+}
+
+.resumo-card span {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.resumo-card strong {
+  color: #38bdf8;
+  font-size: 1.6rem;
+}
+
+@media (max-width: 560px) {
+  .resumo-tarefas {
+    grid-template-columns: 1fr;
+  }
 }
